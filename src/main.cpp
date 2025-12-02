@@ -12,15 +12,14 @@ int main() {
     // ingest CSV data
     compass.ParseCSV("../data/edges.csv", "../data/classes.csv");
 
-    // the below is example code for parsing commandline input
-    int no_of_lines;
     string command;
-    cin >> no_of_lines;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore newline that first cin left over
+    getline(cin, command);
+    int no_of_lines = stoi(command);
+
     for (int i = 0; i < no_of_lines; i++) {
         getline(cin, command);
-
-        // parse your commands however you see fit
         compass.ParseCommand(command);
     }
+    
+    return 0;
 }

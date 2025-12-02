@@ -22,11 +22,11 @@ static string runInput(const string &input) {
         c.ParseCSV("../data/edges.csv", "../data/classes.csv");
 
         istringstream in(input);
-        int n;
-        in >> n;
-        in.ignore(numeric_limits<streamsize>::max(), '\n');
 
         string line;
+        getline(in, line);
+        int n = stoi(line);
+
         for (int i = 0; i < n; ++i) {
             getline(in, line);
             c.ParseCommand(line);
@@ -34,7 +34,6 @@ static string runInput(const string &input) {
     }
 
     cout.rdbuf(oldBuf);
-
     return outputBuffer.str();
 }
 
