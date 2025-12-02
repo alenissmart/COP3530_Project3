@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <sstream>
 #include <iostream>
+#include <limits>
 
 // change if you choose to use a different header name
 #include "CampusCompass.h"
@@ -23,7 +24,7 @@ static string runInput(const string &input) {
         istringstream in(input);
         int n;
         in >> n;
-        in.ignore();
+        in.ignore(numeric_limits<streamsize>::max(), '\n');
 
         string line;
         for (int i = 0; i < n; ++i) {
@@ -84,13 +85,13 @@ TEST_CASE("Example CampusCompass Output Test", "[flag]") {
   // the following is a "raw string" - you can write the exact input (without
   //   any indentation!) and it should work as expected
   // this is based on the input and output of the first public test case
-  string input = R"(6
-insert "Student A" 10000001 1 1 COP3502
-insert "Student B" 10000002 1 1 COP3502
-insert "Student C" 10000003 1 2 COP3502 MAC2311
-dropClass 10000001 COP3502
-remove 10000001
-removeClass COP3502
+  string input = R"(6 
+insert "Student A" 10000001 1 1 COP3502 
+insert "Student B" 10000002 1 1 COP3502 
+insert "Student C" 10000003 1 2 COP3502 MAC2311 
+dropClass 10000001 COP3502 
+remove 10000001 
+removeClass COP3502 
 )";
 
   string expectedOutput = R"(successful

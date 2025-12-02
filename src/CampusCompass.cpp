@@ -474,13 +474,21 @@ bool CampusCompass::VerifySchedule(const string &ufid) {
 bool CampusCompass::ParseCommand(const string &command) {
     // do whatever regex you need to parse validity
     string line = command;
-    size_t a = line.find_first_not_of(" \t\r\n");
-    if (a == string::npos) {
+    auto trim = [](string &s) {
+        size_t a = s.find_first_not_of(" \t\r\n\f\v");
+        if (a == string::npos) {
+            s.clear();
+            return;
+        }
+        size_t b = s.find_last_not_of(" \t\r\n\f\v");
+        s = s.substr(a, b - a + 1);
+    };
+
+    trim(line);
+    if (line.empty()) {
         cout << "unsuccessful" << endl;
         return false;
     }
-    size_t b = line.find_last_not_of(" \t\r\n");
-    line = line.substr(a, b - a + 1);
 
     smatch m;
 
