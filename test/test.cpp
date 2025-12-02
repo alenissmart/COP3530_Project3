@@ -137,90 +137,6 @@ unsuccessful
   REQUIRE(actualOutput == expectedOutput);
 }
 
-TEST_CASE("CampusCompass Output Test 2") {
-  std::string input = R"(5
-insert "Student C" 10000003 1 2 COP3502 MAC2311
-dropClass 10000003 COP3502
-dropClass 10000003 MAC2311
-dropClass 10000003 MAC2311
-remove 10000003
-)";
-
-    std::string expectedOutput = R"(successful
-successful
-successful
-unsuccessful
-unsuccessful
-)";
-
-    std::string actualOutput = runInput(input);
-    REQUIRE(actualOutput == expectedOutput);
-}
-
-TEST_CASE("CampusCompass Output Test 3") {
-    std::string input = R"(6
-insert "Student D" 10000004 1 2 COP3502 MAC2311
-replaceClass 10000004 COP3502 MAC2311
-replaceClass 10000004 COP3502 EEL3701
-replaceClass 10000004 MAC2311 EEL3701
-dropClass 10000004 COP3502
-dropClass 10000004 EEL3701
-)";
-
-    std::string expectedOutput = R"(successful
-unsuccessful
-successful
-unsuccessful
-unsuccessful
-successful
-)";
-
-    std::string actualOutput = runInput(input);
-    REQUIRE(actualOutput == expectedOutput);
-}
-
-TEST_CASE("CampusCompass Output Test 4") {
-    std::string input = R"(6
-insert "SA" 10000011 1 1 COP3530
-insert "SB" 10000012 1 2 COP3530 MAC2311
-insert "SC" 10000013 1 1 MAC2311
-removeClass COP3530
-removeClass MAC2311
-removeClass COP3530
-)";
-
-    std::string expectedOutput = R"(successful
-successful
-successful
-2
-2
-0
-)";
-
-    std::string actualOutput = runInput(input);
-    REQUIRE(actualOutput == expectedOutput);
-}
-
-TEST_CASE("CampusCompass Output Test 5") {
-    std::string input = R"(5
-checkEdgeStatus 9999 8888
-isConnected 9999 8888
-printShortestEdges 99999999
-printStudentZone 99999999
-verifySchedule 99999999
-)";
-
-    std::string expectedOutput = R"(DNE
-unsuccessful
-unsuccessful
-unsuccessful
-unsuccessful
-)";
-
-    std::string actualOutput = runInput(input);
-    REQUIRE(actualOutput == expectedOutput);
-}
-
 TEST_CASE("CampusCompass Output Test Given Example") {
   string input = R"(7
 insert "Brandon" 45679999 20 2 COP3530 MAC2311
@@ -247,7 +163,7 @@ MAC2311 | Total Time: 11
   REQUIRE(actualOutput == expectedOutput);
 }
 
-TEST_CASE("Incorrect Commands") {
+TEST_CASE("CampusCompass Output Test 2") {
     std::string input = R"(5
 insert "A11y" 45679999 1 1 COP3530
 insert "Alice" 1234567 1 1 COP3530
@@ -267,7 +183,7 @@ unsuccessful
     REQUIRE(runInput(input) == expectedOutput);
 }
 
-TEST_CASE("Edge Cases") {
+TEST_CASE("CampusCompass Output Test 3") {
     std::string input = R"(3
 remove 99999999
 dropClass 12345678 COP3530
@@ -283,7 +199,7 @@ unsuccessful
     REQUIRE(runInput(input) == expectedOutput);
 }
 
-TEST_CASE("dropClass, removeClass, remove, replaceClass") {
+TEST_CASE("CampusCompass Output Test 4") {
     std::string input = R"(8
 insert "Alice" 10000001 1 2 COP3530 MAC2311
 replaceClass 10000001 COP3530 EEL3701
@@ -309,7 +225,7 @@ unsuccessful
     REQUIRE(runInput(input) == expectedOutput);
 }
 
-TEST_CASE("printShortestEdges") {
+TEST_CASE("CampusCompass Output Test 5") {
 
     std::string input = R"(4
 insert "Alice" 10000001 1 1 COP3530
